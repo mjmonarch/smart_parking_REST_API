@@ -90,7 +90,7 @@ class FactModel(db.Model):
                                               host=HOST, port=PORT)
         cursor = connection.cursor()
 
-        insert_query = "INSERT INTO facts VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        insert_query = "INSERT INTO facts VALUES(default, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         cursor.execute(insert_query, (self.date, self.time, self.violationType,
                                     self.car_vrp, self.car_contour,
