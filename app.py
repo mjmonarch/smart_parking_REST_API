@@ -6,6 +6,7 @@ from resources.fact import Fact
 from db import db
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'mjmonarch'
 api = Api(app)
 

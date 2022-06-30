@@ -1,6 +1,5 @@
 import psycopg2
-
-# 0017
+from db import db
 
 DBNAME = 'pi'
 USER = 'pi'
@@ -9,7 +8,24 @@ HOST = '192.168.0.112'
 PORT = 5432 
 
 
-class FactModel:
+class FactModel(db.Model):
+    __tablename__ = 'facts'
+    _id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    violationType = db.Column(db.String(20), nullable=False)
+    car_vrp = db.Column(db.String(20), nullable=False)
+    car_contour = db.Column(db.Integer, nullable=False)
+    violation = db.Column(db.Boolean, nullable=False)
+    locationLatitude = db.Column(db.Float, nullable=False)
+    locationLongitude = db.Column(db.Float, nullable=False)
+    photoContent = db.Column(db.LargeBinary, nullable=False)
+    id = db.Column(db.String(100), nullable=False )
+    dispatchCode = db.Column(db.Integer, nullable=False)
+    zoneNumber = db.Column(db.Integer, nullable=False)
+    country = db.Column(db.String(40), nullable=True)
+    address = db.Column(db.String(150), nullable=True)
+    city = db.Column(db.String(40), nullable=True)
 
     def __init__(self, date, time, violationType, car_vrp, car_contour,
                 violation, locationLatitude, locationLongitude, photoContent,
