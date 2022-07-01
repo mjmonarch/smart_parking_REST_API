@@ -92,7 +92,7 @@ class Fact(Resource):
         if result:
             for row in result:
                 facts.append(row.json())
-            return {'facts': facts}, 201
+            return {'facts': facts}, 200
         else:
             return {'message': f'No records with given vrp {vrp_no} are present in database'}, 404
 
