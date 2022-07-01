@@ -84,7 +84,7 @@ class Fact(Resource):
 
     def get(self, vrp_no=None):
         try:
-            result = FactModel.find_by_vrp(vrp_no) if vrp_no else FactModel.find_by_vrp('all')
+            result = FactModel.find_by_vrp(vrp_no) if vrp_no else FactModel.find_all()
         except:
             return {'message': 'An error occurred while querying the database'}, 500
 
@@ -102,24 +102,26 @@ class Fact(Resource):
         date_time = data['date']
         _fact['date'] = date(int(date_time[6:10]), int(date_time[3:5]), int(date_time[0:2]))
         _fact['time'] = time(int(date_time[11:13]), int(date_time[14:16]), int(date_time[17:19]))
-        _fact['violationType'] = data['violationType']
+        _fact['violation_type'] = data['violationType']
         _fact['car_vrp'] = data['car']['vrp']
         _fact['car_contour'] = data['car']['contourClass']
         _fact['violation'] = data['violation']
-        _fact['locationLatitude'] = data['locationLatitude']
-        _fact['locationLongitude'] = data['locationLongitude']
-        _fact['photoContent'] = data['photoContent'].encode()
-        _fact['id'] = data['id']
-        _fact['dispatchCode'] = data['dispatchCode']
-        _fact['zoneNumber'] = data['zoneNumber']
+        _fact['location_latitude'] = data['locationLatitude']
+        _fact['location_longitude'] = data['locationLongitude']
+        _fact['photo_content'] = data['photoContent'].encode()
+        _fact['fact_id'] = data['id']
+        _fact['dispatch_code'] = data['dispatchCode']
+        _fact['zone_number'] = data['zoneNumber']
         _fact['country'] = data['country'] or None
         _fact['address'] = data['address'] or None
         _fact['city'] = data['city'] or None
 
         fact = FactModel(**_fact)
+        print(fact.json())
 
         try:
-            fact.insert()
+            # fact.insert()
+            fact.save()
         except:
             return {'message': 'An error occurred inserting the fact'}, 500
 
