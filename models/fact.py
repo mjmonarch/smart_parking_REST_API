@@ -53,7 +53,7 @@ class FactModel(db.Model):
 
     @classmethod
     def find_by_vrp(cls, vrp_no):
-        return cls.query.filter_by(car_vrp=vrp_no)
+        return cls.query.filter_by(car_vrp=vrp_no).all()
 
     @classmethod
     def find_all(cls):
