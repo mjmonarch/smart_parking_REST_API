@@ -1,15 +1,17 @@
+import base64
+
 from db import db
 
 class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-    password = db.Column(db.String(80))
+    username = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.LargeBinary, nullable=False)
 
     def __init__(self, username, password):
         self.username = username
-        self.password = password
+        self.password = base64.b64encode(password.encode("utf-8"))
     
     def save_to_db(self):
         db.session.add(self)
