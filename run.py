@@ -10,8 +10,8 @@ db.init_app(app)
 def create_tables():
     db.create_all(app=app)
 
-    # admin = UserModel('admin', base64.b64encode('strong_password'.encode("utf-8")))
-    # db.session.add(admin)
-    # db.session.commit()
+    admin = UserModel('admin', 'strong_password')
+    db.session.add(admin)
+    db.session.commit()
 
     
