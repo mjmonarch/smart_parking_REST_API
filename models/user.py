@@ -1,5 +1,3 @@
-import base64
-
 from db import db
 
 class UserModel(db.Model):
@@ -11,7 +9,7 @@ class UserModel(db.Model):
 
     def __init__(self, username, password):
         self.username = username
-        self.password = base64.b64encode(password.encode("utf-8"))
+        self.password = password
     
     def save_to_db(self):
         db.session.add(self)
