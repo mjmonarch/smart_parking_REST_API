@@ -82,7 +82,7 @@ class Fact(Resource):
         required=False
     )
 
-    @jwt_required
+    @jwt_required()
     def get(self, vrp_no=None):
         try:
             result = FactModel.find_by_vrp(vrp_no) if vrp_no else FactModel.find_all()
