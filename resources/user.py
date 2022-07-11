@@ -1,6 +1,7 @@
 import base64
 
 from flask_restful import Resource, reqparse
+from flask_jwt import jwt_required
 from models.user import UserModel
 
 class UserRegister(Resource):
@@ -16,6 +17,7 @@ class UserRegister(Resource):
         help="Mandatory parameter: password"
     )
 
+    @jwt_required()
     def post(self):
         data = UserRegister.parser.parse_args()
 

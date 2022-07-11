@@ -2,7 +2,9 @@ import os
 
 from flask import Flask
 from flask_restful import Api
+from flask_jwt import JWT
 
+from security import authentificate, identity
 from resources.fact import Fact
 from resources.user import UserRegister
 
@@ -15,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'mjmonarch'
 api = Api(app)
 
+jwt = JWT(app, authentificate, identity) # /auth
 
 routes = ['/facts', '/facts/<string:vrp_no>']
 api.add_resource(Fact, *routes)
