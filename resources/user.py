@@ -1,7 +1,7 @@
 import base64
 
 from flask_restful import Resource, reqparse
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_identity
 from models.user import UserModel
 
 class UserRegister(Resource):
@@ -19,6 +19,11 @@ class UserRegister(Resource):
 
     @jwt_required()
     def post(self):
+        username = current_identity.username
+
+        if username != 'admin':
+             return {'message': 'Only admin can create new users.'}, 401
+
         data = UserRegister.parser.parse_args()
 
         #check whether user already exists
