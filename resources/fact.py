@@ -121,7 +121,6 @@ class Fact(Resource):
         print(fact.json())
 
         try:
-            # fact.insert()
             fact.save()
         except:
             return {'message': 'An error occurred inserting the fact'}, 500
