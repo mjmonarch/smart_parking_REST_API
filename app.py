@@ -6,7 +6,7 @@ from flask_jwt import JWT
 
 from security import authentificate, identity
 from resources.fact import Fact
-from resources.user import UserRegister
+from resources.user import UserRegister, User
 
 from db import db
 
@@ -24,7 +24,7 @@ routes = ['/facts', '/facts/<string:vrp_no>']
 api.add_resource(Fact, *routes)
 
 api.add_resource(UserRegister, '/register')
-
+api.add_resource(User, '/user/<int:user_id>')
 
 if __name__ == '__main__':
     db.init_app(app)
