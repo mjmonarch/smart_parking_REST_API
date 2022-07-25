@@ -37,8 +37,7 @@ class UserRegister(Resource):
 
 class User(Resource):
     @jwt_required()
-    @classmethod
-    def get(cls, user_id):
+    def get(self, user_id):
         username = current_identity.username
 
         if username != 'admin':
@@ -50,8 +49,7 @@ class User(Resource):
         return user.json()
 
     @jwt_required()
-    @classmethod
-    def delete(cls, user_id):
+    def delete(self, user_id):
         userid = current_identity.id
 
         if userid != '1':
