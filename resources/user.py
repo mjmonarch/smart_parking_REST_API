@@ -41,8 +41,8 @@ class User(Resource):
     def get(cls, user_id):
         username = current_identity.username
 
-        # if username != 'admin':
-        #      return {'message': 'Only admin can get user info.'}, 401
+        if username != 'admin':
+             return {'message': 'Only admin can get user info.'}, 401
 
         user = UserModel.find_by_id(user_id)
         if not user:
