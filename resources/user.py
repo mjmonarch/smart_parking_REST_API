@@ -49,12 +49,13 @@ class User(Resource):
             return {'message': 'User not found'}, 404
         return user.json()
 
+    @jwt_required()
     @classmethod
     def delete(cls, user_id):
-        username = current_identity.username
+        userid = current_identity.id
 
-        # if username != 'admin':
-        #      return {'message': 'Only admin can delete users.'}, 401
+        if userid != '1':
+             return {'message': 'Only admin can delete users.'}, 401
         
         user = UserModel.find_by_id(user_id)
         if not user:
