@@ -52,8 +52,8 @@ class User(Resource):
     def delete(self, user_id):
         userid = current_identity.id
 
-        if userid != '1':
-             return {'message': f'Only admin can delete users. Current id is {userid}'}, 401
+        if userid != 1:
+             return {'message': f'Only admin can delete users.'}, 401
         
         user = UserModel.find_by_id(user_id)
         if not user:
